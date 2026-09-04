@@ -1,0 +1,17 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        combinations = []
+        curComb = []
+
+        def back(i, combinations, curComb):
+            if len(curComb) >= k:
+                combinations.append(curComb.copy())
+                return
+            if i > n:
+                return
+            curComb.append(i)
+            back(i + 1, combinations, curComb)
+            curComb.pop()
+            back(i + 1, combinations, curComb)
+        back(1, combinations, curComb)
+        return combinations
